@@ -1,0 +1,96 @@
+{
+  "name": "react-remote",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/react-remote/src",
+  "projectType": "application",
+  "tags": ["react-remote"],
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/react-remote",
+        "index": "apps/react-remote/src/index.html",
+        "baseHref": "/",
+        "main": "apps/react-remote/src/main.ts",
+        "tsConfig": "apps/react-remote/tsconfig.app.json",
+        "assets": [
+          "apps/react-remote/src/favicon.ico",
+          "apps/react-remote/src/assets"
+        ],
+        "styles": ["apps/react-remote/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "apps/react-remote/webpack.config.ts"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/react-remote/src/environments/environment.ts",
+              "with": "apps/react-remote/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/react:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "react-remote:build",
+        "hmr": true,
+        "port": 4201
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "react-remote:build:development"
+        },
+        "production": {
+          "buildTarget": "react-remote:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/react-remote/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "react-remote:build",
+        "watch": false,
+        "port": 4201
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "react-remote:build:development"
+        },
+        "production": {
+          "buildTarget": "react-remote:build:production"
+        }
+      }
+    }
+  }
+}

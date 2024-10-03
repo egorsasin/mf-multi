@@ -1,10 +1,8 @@
 import * as React from 'react';
 
-import NxWelcome from './nx-welcome';
-
 import { Link, Route, Routes } from 'react-router-dom';
 
-import { loadRemoteModule } from '@nx/react/mf';
+const Component = React.lazy(() => import('react-remote/Module'));
 
 export function App() {
   return (
@@ -15,7 +13,14 @@ export function App() {
         </li>
       </ul>
       <Routes>
-        <Route path="/" element={<NxWelcome title="shell" />} />
+        <Route
+          path="/"
+          element={
+            <h1>
+              <Component />
+            </h1>
+          }
+        />
       </Routes>
     </React.Suspense>
   );
