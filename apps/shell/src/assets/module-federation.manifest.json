@@ -1,1 +1,4 @@
-{ "react-remote": "http://localhost:4201" }
+{
+  "react-remote": "http://localhost:4201",
+  "ng-remote": "http://localhost:4202"
+}

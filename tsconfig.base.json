@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "ng-remote/Routes": ["apps/ng-remote/src/remote-entry.ts"],
       "react-remote/Module": ["apps/react-remote/src/remote-entry.ts"]
     }
   },

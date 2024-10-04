@@ -1,28 +1,51 @@
 import * as React from 'react';
 
-import { Link, Route, Routes } from 'react-router-dom';
-
 const Component = React.lazy(() => import('react-remote/Module'));
 
+import { mount } from 'ng-remote/Routes';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'app-ng-remote-entry': React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement>,
+        HTMLElement
+      >;
+    }
+  }
+}
+
 export function App() {
+  const ngComponentRef = React.useRef();
+
+  const ngComponent = async () => {
+    ngComponentRef.current = mount();
+  };
+
+  React.useEffect(() => {
+    ngComponent();
+  }, []);
+
   return (
-    <React.Suspense fallback={null}>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-      </ul>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <h1>
-              <Component />
-            </h1>
-          }
-        />
-      </Routes>
-    </React.Suspense>
+    <div>
+      <header
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginBottom: '2rem',
+        }}
+      >
+        <h2>REACT SHELL APPLICATION</h2>
+      </header>
+
+      <div style={{ display: 'flex', gap: '6rem', justifyContent: 'center' }}>
+        <React.Suspense fallback={null}>
+          <Component />
+        </React.Suspense>
+
+        <app-ng-remote-entry></app-ng-remote-entry>
+      </div>
+    </div>
   );
 }
 
