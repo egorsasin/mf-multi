@@ -11,7 +11,7 @@
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
-        "outputPath": "dist/apps/shell",
+        "outputPath": "dist/apps/shell/browser",
         "index": "apps/shell/src/index.html",
         "baseHref": "/",
         "main": "apps/shell/src/main.ts",
@@ -45,20 +45,21 @@
       }
     },
     "serve": {
-      "executor": "@nx/react:module-federation-dev-server",
+      "executor": "@nx/react:module-federation-ssr-dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "shell:build",
-        "hmr": true,
-        "port": 4200
+        "browserTarget": "shell:build:development",
+        "serverTarget": "shell:serve-server:development",
+        "port": 4200,
+        "browserTargetOptions": {
+          "watch": true
+        }
       },
       "configurations": {
-        "development": {
-          "buildTarget": "shell:build:development"
-        },
+        "development": {},
         "production": {
-          "buildTarget": "shell:build:production",
-          "hmr": false
+          "browserTarget": "shell:build:production",
+          "serverTarget": "shell:serve-server:production"
         }
       }
     },
@@ -86,6 +87,72 @@
         },
         "production": {
           "buildTarget": "shell:build:production"
+        }
+      }
+    },
+    "server": {
+      "dependsOn": ["build"],
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "main": "apps/shell/server.ts",
+        "outputPath": "dist/apps/shell/server",
+        "outputFileName": "server.js",
+        "tsConfig": "apps/shell/tsconfig.server.json",
+        "compiler": "babel",
+        "externalDependencies": "all",
+        "outputHashing": "none",
+        "webpackConfig": "apps/shell/webpack.server.config.ts"
+      },
+      "configurations": {
+        "development": {
+          "optimization": false,
+          "sourceMap": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/shell/src/environments/environment.ts",
+              "with": "apps/shell/src/environments/environment.prod.ts"
+            }
+          ],
+          "sourceMap": false
+        }
+      }
+    },
+    "serve-browser": {
+      "executor": "@nx/react:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "shell:build",
+        "hmr": true,
+        "port": 4200
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "shell:build:development"
+        },
+        "production": {
+          "buildTarget": "shell:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "serve-server": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "shell:server:development",
+        "buildTargetOptions": {
+          "watch": true
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "buildTarget": "shell:server:production"
         }
       }
     }

@@ -2,8 +2,6 @@ import * as React from 'react';
 
 const Component = React.lazy(() => import('react-remote/Module'));
 
-import { mount } from 'ng-remote/Routes';
-
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -19,6 +17,7 @@ export function App() {
   const ngComponentRef = React.useRef();
 
   const ngComponent = async () => {
+    const { mount } = await import('ng-remote/Routes');
     ngComponentRef.current = mount();
   };
 

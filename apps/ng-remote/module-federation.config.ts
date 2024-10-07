@@ -6,7 +6,7 @@ const config: ModuleFederationConfig = {
     './Routes': 'apps/ng-remote/src/remote-entry.ts',
   },
   shared: () => {
-    return { singleton: true, strictVersion: true, requiredVersion: 'auto' };
+    return { singleton: true, eager: true, requiredVersion: 'auto' };
   },
 };
 
