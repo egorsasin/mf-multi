@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "ng-remote/Routes": ["apps/ng-remote/src/remote-entry.ts"],
-      "react-remote/Module": ["apps/react-remote/src/remote-entry.ts"]
+      "react-remote/Module": ["apps/react-remote/src/remote-entry.ts"],
+      "sales-remote/Module": ["apps/sales-remote/src/remote-entry.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

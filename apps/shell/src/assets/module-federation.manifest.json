@@ -1,4 +1,4 @@
 {
   "react-remote": "http://localhost:4201",
-  "ng-remote": "http://localhost:4202"
+  "sales-remote": "http://localhost:4203"
 }
