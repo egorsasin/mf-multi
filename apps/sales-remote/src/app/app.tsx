@@ -7,7 +7,7 @@ export function App() {
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
       <svg
-        style={{ color: 'rgb(8 126 164', width: '100px', height: '100px' }}
+        style={{ color: '#559955', width: '100px', height: '100px' }}
         width="100%"
         height="100%"
         viewBox="-10.5 -9.45 21 18.9"
@@ -21,7 +21,7 @@ export function App() {
           <ellipse rx="10" ry="4.5" transform="rotate(120)"></ellipse>
         </g>
       </svg>
-      <h3>PARTS MFE APPLICATION</h3>
+      <h3>SALES MFE APPLICATION</h3>
     </div>
   );
 }

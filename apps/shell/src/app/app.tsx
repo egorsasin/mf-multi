@@ -1,31 +1,8 @@
 import * as React from 'react';
 
-const Component = React.lazy(() => import('react-remote/Module'));
-
-import { mount } from 'ng-remote/Routes';
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'app-ng-remote-entry': React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement>,
-        HTMLElement
-      >;
-    }
-  }
-}
+import AppRouter from '../router/AppRouter';
 
 export function App() {
-  const ngComponentRef = React.useRef();
-
-  const ngComponent = async () => {
-    ngComponentRef.current = mount();
-  };
-
-  React.useEffect(() => {
-    ngComponent();
-  }, []);
-
   return (
     <div>
       <header
@@ -35,16 +12,10 @@ export function App() {
           marginBottom: '2rem',
         }}
       >
-        <h2>REACT SHELL APPLICATION</h2>
+        <h1>Dealer HUB</h1>
       </header>
 
-      <div style={{ display: 'flex', gap: '6rem', justifyContent: 'center' }}>
-        <React.Suspense fallback={null}>
-          <Component />
-        </React.Suspense>
-
-        <app-ng-remote-entry></app-ng-remote-entry>
-      </div>
+      <AppRouter />
     </div>
   );
 }
