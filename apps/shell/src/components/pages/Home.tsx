@@ -1,5 +1,7 @@
 import React, { Suspense } from 'react';
 
+import ClientOnly from '../client-only/ClientOnly';
+
 const PartsComponent = React.lazy(() => import('react-remote/Module'));
 const SalesComponent = React.lazy(() => import('sales-remote/Module'));
 
@@ -9,8 +11,10 @@ const Home: React.FC = () => {
       <main>
         <div style={{ display: 'flex', gap: '6rem', justifyContent: 'center' }}>
           <Suspense fallback={<div>Loading...</div>}>
-            <PartsComponent />
-            <SalesComponent />
+            <ClientOnly>
+              <PartsComponent />
+              <SalesComponent />
+            </ClientOnly>
           </Suspense>
         </div>
       </main>

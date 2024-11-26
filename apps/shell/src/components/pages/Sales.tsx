@@ -1,5 +1,8 @@
 import React, { Suspense } from 'react';
 
+import ErrorBoundary from '../error-boundary/ErrorBoundary';
+import ClientOnly from '../client-only/ClientOnly';
+
 const SalesComponent = React.lazy(() => import('sales-remote/Module'));
 
 const Sales: React.FC = () => {
@@ -8,7 +11,11 @@ const Sales: React.FC = () => {
       <main>
         <div style={{ display: 'flex', gap: '6rem', justifyContent: 'center' }}>
           <Suspense fallback={<div>Loading...</div>}>
-            <SalesComponent />
+            <ClientOnly>
+              <ErrorBoundary>
+                <SalesComponent />
+              </ErrorBoundary>
+            </ClientOnly>
           </Suspense>
         </div>
       </main>

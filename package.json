@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve shell"
+    "start": "nx serve shell",
+    "build:shell": "nx build shell"
   },
   "private": true,
   "dependencies": {
@@ -21,7 +22,7 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3",
-     "@module-federation/node": "~0.9.9",
+    "@module-federation/node": "~0.9.9",
     "cors": "~2.8.5",
     "express": "~4.18.2",
     "isbot": "^3.6.5"
