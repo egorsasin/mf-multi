@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 
-const SalesComponent = React.lazy(() => import('sales-remote/Module'));
+const SalesComponent = React.lazy(() => import('sales/Module'));
 
 const Sales: React.FC = () => {
   return (

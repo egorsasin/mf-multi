@@ -1,2 +1,2 @@
-declare module 'react-remote/Module';
+declare module 'parts/Module';
 declare module 'ng-remote/Routes';

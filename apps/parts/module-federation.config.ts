@@ -1,8 +1,8 @@
 import { ModuleFederationConfig } from '@nx/webpack';
 
 const config: ModuleFederationConfig = {
-  name: 'sales-remote',
-  library: { type: 'global', name: 'sales-remote' },
+  name: 'parts',
+  library: { type: 'var', name: 'parts' },
   exposes: {
     './Module': './src/remote-entry.ts',
   },

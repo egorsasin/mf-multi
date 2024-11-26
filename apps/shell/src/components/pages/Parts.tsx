@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 
 import ErrorBoundary from '../error-boundary/ErrorBoundary';
 
-const PartsComponent = React.lazy(() => import('react-remote/Module'));
+const PartsComponent = React.lazy(() => import('parts/Module'));
 
 const Parts: React.FC = () => {
   return (
