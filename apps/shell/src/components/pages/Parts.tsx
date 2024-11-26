@@ -4,21 +4,26 @@ import { loadRemoteModule } from '@nx/react/mf';
 import ErrorBoundary from '../error-boundary/ErrorBoundary';
 import { DEFINITION_KEY } from '../../constants';
 
-const keys = Object.keys((window as any)[DEFINITION_KEY] || {});
-const Component = React.lazy(() =>
-  loadRemoteModule(keys[keys.length - 1], './Module')
-);
-
 const Parts: React.FC = () => {
   return (
     <div>
       <main>
         <div style={{ display: 'flex', gap: '6rem', justifyContent: 'center' }}>
-          <Suspense fallback={<div>Loading...</div>}>
-            <ErrorBoundary>
-              <Component />
-            </ErrorBoundary>
-          </Suspense>
+          {Object.keys((window as any)[DEFINITION_KEY] || {})
+            .filter((key) => key === 'sales')
+            .map((definition) => {
+              const Component = React.lazy(() =>
+                loadRemoteModule(definition, './Module')
+              );
+
+              return (
+                <Suspense fallback={<div>Loading...</div>} key={definition}>
+                  <ErrorBoundary>
+                    <Component />
+                  </ErrorBoundary>
+                </Suspense>
+              );
+            })}
         </div>
       </main>
     </div>

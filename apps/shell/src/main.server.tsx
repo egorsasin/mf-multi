@@ -7,6 +7,10 @@ import App from './app/app';
 
 import { StaticRouter } from 'react-router-dom/server';
 
+if (typeof window === 'undefined') {
+  (global as any).window = {};
+}
+
 let indexHtml: null | string = null;
 
 export function handleRequest(indexPath: string) {
