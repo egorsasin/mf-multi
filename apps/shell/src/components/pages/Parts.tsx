@@ -1,8 +1,13 @@
 import React, { Suspense } from 'react';
+import { loadRemoteModule } from '@nx/react/mf';
 
 import ErrorBoundary from '../error-boundary/ErrorBoundary';
+import { DEFINITION_KEY } from '../../constants';
 
-const PartsComponent = React.lazy(() => import('parts/Module'));
+const keys = Object.keys((window as any)[DEFINITION_KEY] || {});
+const Component = React.lazy(() =>
+  loadRemoteModule(keys[keys.length - 1], './Module')
+);
 
 const Parts: React.FC = () => {
   return (
@@ -11,7 +16,7 @@ const Parts: React.FC = () => {
         <div style={{ display: 'flex', gap: '6rem', justifyContent: 'center' }}>
           <Suspense fallback={<div>Loading...</div>}>
             <ErrorBoundary>
-              <PartsComponent />
+              <Component />
             </ErrorBoundary>
           </Suspense>
         </div>

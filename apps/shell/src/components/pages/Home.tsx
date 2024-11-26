@@ -1,18 +1,26 @@
 import { loadRemoteModule } from '@nx/react/mf';
 import React, { Suspense } from 'react';
 
-const PartsComponent = React.lazy(() => import('parts/Module'));
-const SalesComponent = React.lazy(() => loadRemoteModule('sales', './Module'));
+import { DEFINITION_KEY } from '../../constants';
 
 const Home: React.FC = () => {
   return (
     <div>
       <main>
         <div style={{ display: 'flex', gap: '6rem', justifyContent: 'center' }}>
-          <Suspense fallback={<div>Loading...</div>}>
-            <PartsComponent />
-            <SalesComponent />
-          </Suspense>
+          {Object.keys((window as any)[DEFINITION_KEY] || {}).map(
+            (definition) => {
+              const Component = React.lazy(() =>
+                loadRemoteModule(definition, './Module')
+              );
+
+              return (
+                <Suspense fallback={<div>Loading...</div>} key={definition}>
+                  <Component />
+                </Suspense>
+              );
+            }
+          )}
         </div>
       </main>
     </div>
