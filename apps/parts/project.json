@@ -1,9 +1,9 @@
 {
-  "name": "react-remote",
+  "name": "parts",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/react-remote/src",
+  "sourceRoot": "apps/parts/src",
   "projectType": "application",
-  "tags": ["react-remote"],
+  "tags": ["parts"],
   "targets": {
     "build": {
       "executor": "@nx/webpack:webpack",
@@ -11,18 +11,15 @@
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
-        "outputPath": "dist/apps/react-remote",
-        "index": "apps/react-remote/src/index.html",
+        "outputPath": "dist/apps/parts",
+        "index": "apps/parts/src/index.html",
         "baseHref": "/",
-        "main": "apps/react-remote/src/main.ts",
-        "tsConfig": "apps/react-remote/tsconfig.app.json",
-        "assets": [
-          "apps/react-remote/src/favicon.ico",
-          "apps/react-remote/src/assets"
-        ],
-        "styles": ["apps/react-remote/src/styles.scss"],
+        "main": "apps/parts/src/main.ts",
+        "tsConfig": "apps/parts/tsconfig.app.json",
+        "assets": ["apps/parts/src/favicon.ico", "apps/parts/src/assets"],
+        "styles": ["apps/parts/src/styles.scss"],
         "scripts": [],
-        "webpackConfig": "apps/react-remote/webpack.config.ts"
+        "webpackConfig": "apps/parts/webpack.config.ts"
       },
       "configurations": {
         "development": {
@@ -34,8 +31,8 @@
         "production": {
           "fileReplacements": [
             {
-              "replace": "apps/react-remote/src/environments/environment.ts",
-              "with": "apps/react-remote/src/environments/environment.prod.ts"
+              "replace": "apps/parts/src/environments/environment.ts",
+              "with": "apps/parts/src/environments/environment.prod.ts"
             }
           ],
           "optimization": true,
@@ -51,16 +48,16 @@
       "executor": "@nx/react:module-federation-dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "react-remote:build",
+        "buildTarget": "parts:build",
         "hmr": true,
         "port": 4201
       },
       "configurations": {
         "development": {
-          "buildTarget": "react-remote:build:development"
+          "buildTarget": "parts:build:development"
         },
         "production": {
-          "buildTarget": "react-remote:build:production",
+          "buildTarget": "parts:build:production",
           "hmr": false
         }
       }
@@ -72,23 +69,23 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/react-remote/jest.config.ts"
+        "jestConfig": "apps/parts/jest.config.ts"
       }
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "defaultConfiguration": "production",
       "options": {
-        "buildTarget": "react-remote:build",
+        "buildTarget": "parts:build",
         "watch": false,
         "port": 4201
       },
       "configurations": {
         "development": {
-          "buildTarget": "react-remote:build:development"
+          "buildTarget": "parts:build:development"
         },
         "production": {
-          "buildTarget": "react-remote:build:production"
+          "buildTarget": "parts:build:production"
         }
       }
     }

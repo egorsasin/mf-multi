@@ -1,9 +1,10 @@
+import { loadRemoteModule } from '@nx/react/mf';
 import React, { Suspense } from 'react';
 
 import ClientOnly from '../client-only/ClientOnly';
 
-const PartsComponent = React.lazy(() => import('react-remote/Module'));
-const SalesComponent = React.lazy(() => import('sales-remote/Module'));
+const PartsComponent = React.lazy(() => import('parts/Module'));
+const SalesComponent = React.lazy(() => loadRemoteModule('sales', './Module'));
 
 const Home: React.FC = () => {
   return (

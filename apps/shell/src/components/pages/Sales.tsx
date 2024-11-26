@@ -3,7 +3,7 @@ import React, { Suspense } from 'react';
 import ErrorBoundary from '../error-boundary/ErrorBoundary';
 import ClientOnly from '../client-only/ClientOnly';
 
-const SalesComponent = React.lazy(() => import('sales-remote/Module'));
+const SalesComponent = React.lazy(() => import('sales/Module'));
 
 const Sales: React.FC = () => {
   return (

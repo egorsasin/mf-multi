@@ -1,1 +1,1 @@
-export const MANIFEST_KEY = '___dealerhub_remores___';
+export const DEFINITION_KEY = '___remote_definitions___';

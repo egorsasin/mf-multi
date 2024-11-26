@@ -1,4 +1,4 @@
 {
-  "react-remote": "http://localhost:4201",
-  "sales-remote": "http://localhost:4203"
+  "parts": "http://localhost:4201",
+  "sales": "http://localhost:4203"
 }
