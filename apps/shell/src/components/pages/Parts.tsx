@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 
 import ErrorBoundary from '../error-boundary/ErrorBoundary';
-import ClientOnly from '../client-only/ClientOnly';
 
 const PartsComponent = React.lazy(() => import('parts/Module'));
 
@@ -11,11 +10,9 @@ const Parts: React.FC = () => {
       <main>
         <div style={{ display: 'flex', gap: '6rem', justifyContent: 'center' }}>
           <Suspense fallback={<div>Loading...</div>}>
-            <ClientOnly>
-              <ErrorBoundary>
-                <PartsComponent />
-              </ErrorBoundary>
-            </ClientOnly>
+            <ErrorBoundary>
+              <PartsComponent />
+            </ErrorBoundary>
           </Suspense>
         </div>
       </main>
