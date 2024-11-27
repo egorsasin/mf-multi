@@ -4,7 +4,10 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve shell",
-    "build:shell": "nx build shell"
+    "build:shell": "nx build shell",
+    "build:sales": "nx build sales",
+    "build:parts": "nx build parts",
+    "build:ssr": "nx server shell"
   },
   "private": true,
   "dependencies": {
