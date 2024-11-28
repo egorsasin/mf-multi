@@ -1,0 +1,34 @@
+services:
+  sales:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APP_NAME=sales
+    ports:
+      - "4203:4203"
+
+  parts:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APP_NAME=parts
+    ports:
+      - "4201:4201"
+
+  shell:
+    build: 
+      context: .
+      dockerfile: Dockerfile.shell
+    environment:
+        PARTS_URL: parts
+        SALES_URL: sales
+    ports:
+      - "4200:4200"
+    depends_on:
+      sales:
+        condition: service_started
+      parts:
+        condition: service_started
+

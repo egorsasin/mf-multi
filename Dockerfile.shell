@@ -1,0 +1,28 @@
+FROM node:18 as build
+
+ARG PARTS_URL
+
+ARG SALES_URL
+
+ENV PARTS=${PARTS_URL}
+
+ENV SALES=${SALES_URL}
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm ci --legacy-peer-deps
+
+RUN npm install -g nx
+
+RUN nx build shell
+
+RUN nx reset && nx server shell
+
+RUN cp dist/apps/shell/server/server.js .
+
+CMD node server.js --host 0.0.0.0
+
+
+
