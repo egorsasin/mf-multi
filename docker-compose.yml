@@ -21,9 +21,6 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.shell
-    environment:
-        PARTS_URL: parts
-        SALES_URL: sales
     ports:
       - "4200:4200"
     depends_on:

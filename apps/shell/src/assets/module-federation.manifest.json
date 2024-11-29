@@ -1,4 +1,4 @@
 {
-  "parts": "http://{process.env.PARTS_URL}:4201",
-  "sales": "http://{process.env.SALES_URL}:4203"
+  "parts": "http://localhost:4201",
+  "sales": "http://localhost:4203"
 }

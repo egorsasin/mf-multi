@@ -1,13 +1,5 @@
 FROM node:18 as build
 
-ARG PARTS_URL
-
-ARG SALES_URL
-
-ENV PARTS=${PARTS_URL}
-
-ENV SALES=${SALES_URL}
-
 WORKDIR /app
 
 COPY . .
