@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:18 AS build
 
 ARG APP_NAME
 
@@ -8,12 +8,20 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm ci --legacy-peer-deps
+RUN npm install
 
 RUN npm install -g nx
 
 RUN nx build $APP
-  
-CMD nx serve $APP --host 0.0.0.0
+
+FROM nginx:alpine 
+
+ARG APP_NAME
+
+ENV APP=${APP_NAME}
+
+COPY --from=build /app/dist/apps/$APP /usr/share/nginx/html
+
+CMD ["nginx", "-g", "daemon off;"]
 
 
